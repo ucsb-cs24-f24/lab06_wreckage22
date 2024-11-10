@@ -1,1 +1,0 @@
-The writeup is under: https://ucsb-cs24.github.io/w24/lab/lab06/
