@@ -1,5 +1,3 @@
-// Winter'24
-// Instructor: Diba Mirza
 // Student name: 
 #include <iostream>
 #include <fstream>
@@ -20,16 +18,16 @@ using namespace std;
 
 bool parseLine(string &line, string &movieName, double &movieRating);
 
-int main(int argc, char** argv){
-    if (argc < 2){
+int main(int argc, char** argv) {
+    if (argc < 2) {
         cerr << "Not enough arguments provided (need at least 1 argument)." << endl;
-        cerr << "Usage: " << argv[ 0 ] << " moviesFilename prefixFilename " << endl;
+        cerr << "Usage: " << argv[0] << " moviesFilename prefixFilename " << endl;
         exit(1);
     }
 
-    ifstream movieFile (argv[1]);
+    ifstream movieFile(argv[1]);
  
-    if (movieFile.fail()){
+    if (movieFile.fail()) {
         cerr << "Could not open file " << argv[1];
         exit(1);
     }
@@ -39,21 +37,21 @@ int main(int argc, char** argv){
     string line, movieName;
     double movieRating;
     // Read each file and store the name and rating
-    while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
-            // Use std::string movieName and double movieRating
-            // to construct your Movie objects
-            // cout << movieName << " has rating " << movieRating << endl;
-            // insert elements into your data structure
+    while (getline(movieFile, line) && parseLine(line, movieName, movieRating)) {
+        // Use std::string movieName and double movieRating
+        // to construct your Movie objects
+        // cout << movieName << " has rating " << movieRating << endl;
+        // insert elements into your data structure
     }
 
     movieFile.close();
 
-    if (argc == 2){
-            //print all the movies in ascending alphabetical order of movie names
-            return 0;
+    if (argc == 2) {
+        //print all the movies in ascending alphabetical order of movie names
+        return 0;
     }
 
-    ifstream prefixFile (argv[2]);
+    ifstream prefixFile(argv[2]);
 
     if (prefixFile.fail()) {
         cerr << "Could not open file " << argv[2];
@@ -61,7 +59,7 @@ int main(int argc, char** argv){
     }
 
     vector<string> prefixes;
-    while (getline (prefixFile, line)) {
+    while (getline(prefixFile, line)) {
         if (!line.empty()) {
             prefixes.push_back(line);
         }
@@ -70,7 +68,7 @@ int main(int argc, char** argv){
     //  For each prefix,
     //  Find all movies that have that prefix and store them in an appropriate data structure
     //  If no movie with that prefix exists print the following message
-    cout << "No movies found with prefix "<<"<replace with prefix>" << endl;
+    cout << "No movies found with prefix " << "<replace with prefix>" << endl;
 
     //  For each prefix,
     //  Print the highest rated movie with that prefix if it exists.
@@ -88,5 +86,6 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
     if (movieName[0] == '\"') {
         movieName = movieName.substr(1, movieName.length() - 2);
     }
+
     return true;
 }
