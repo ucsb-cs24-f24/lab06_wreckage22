@@ -36,8 +36,11 @@ int main(int argc, char** argv) {
 
     string line, movieName;
     double movieRating;
-    // Read each file and store the name and rating
+    // Read each file and store the name and rating    
+    MovieSet ourMovieSet;
+
     while (getline(movieFile, line) && parseLine(line, movieName, movieRating)) {
+        ourMovieSet.insertMovie(Movie(movieName, movieRating));
         // Use std::string movieName and double movieRating
         // to construct your Movie objects
         // cout << movieName << " has rating " << movieRating << endl;
@@ -45,7 +48,8 @@ int main(int argc, char** argv) {
     }
 
     movieFile.close();
-
+    ourMovieSet.printMovie();
+    
     if (argc == 2) {
         //print all the movies in ascending alphabetical order of movie names
         return 0;
