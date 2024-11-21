@@ -36,8 +36,6 @@ void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) 
 
             bestMovies2.emplace_back(matchingMovies2.front().first, matchingMovies2.front().second);
         }
-
-        std::cout << "god\n";
     }
 
     for (const auto& [prefix2, bestRating2] : bestMovies2) {
