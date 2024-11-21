@@ -7,7 +7,7 @@
 
 class MovieSet2 {
 private:
-    std::unordered_map<std::string, double> movies2; \
+    std::unordered_map<std::string, double> movies2;
 
 public:
     void insertMovie2(const std::string& movieName2, double rating2);

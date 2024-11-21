@@ -3,13 +3,22 @@
 #include <algorithm>
 #include <vector>
 #include <iomanip>
+#include <sstream>
+#include <cmath>
 
 void MovieSet2::insertMovie2(const std::string& movieName2, double rating2) {
     movies2[movieName2] = rating2; 
 }
 
+bool customComparator(const std::pair<std::string, double>& a, const std::pair<std::string, double>& b) {
+    if (a.second != b.second) {
+        return a.second > b.second;  
+    }
+    return a.first < b.first; 
+}
+
 void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) const {
-    std::vector<std::pair<std::string, double>> bestMovies2;
+    std::vector<std::string> LastPrint;
 
     for (size_t i = 0; i < prefixes2.size(); ++i) {
         const auto& prefix2 = prefixes2[i];
@@ -22,33 +31,30 @@ void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) 
         }
 
         if (i > 0) {
-            std::cout << "\n"; 
+            std::cout << "\n";  
         }
 
         if (matchingMovies2.empty()) {
             std::cout << "No movies found with prefix " << prefix2 << "\n";
-            bestMovies2.emplace_back(prefix2, -1.0);
         } else {
-            std::sort(matchingMovies2.begin(), matchingMovies2.end(),
-                      [](const auto& a, const auto& b) {
-                          return a.second != b.second ? a.second > b.second : a.first < b.first;
-                      });
+            std::sort(matchingMovies2.begin(), matchingMovies2.end(), customComparator);
 
             for (const auto& [name2, rating2] : matchingMovies2) {
                 std::cout << name2 << ", " << std::fixed << std::setprecision(1) << rating2 << "\n";
             }
 
-            bestMovies2.emplace_back(matchingMovies2.front().first, matchingMovies2.front().second);
+            const auto& bestMovie = matchingMovies2.front();
+
+            std::stringstream ss;
+            ss << std::fixed << std::setprecision(1) << bestMovie.second;
+            std::string ratingStr = ss.str();
+
+            LastPrint.push_back("Best movie with prefix " + prefix2 + " is: " + bestMovie.first + " with rating " + ratingStr);
         }
     }
 
-    for (const auto& [prefix2, bestRating2] : bestMovies2) {
-        if (bestRating2 == -1.0) {
-            std::cout << "No movies found with prefix " << prefix2 << "\n";
-        } else {
-            std::cout << "Best movie with prefix " << prefix2 << " is: "
-                      << prefix2 << " with rating "
-                      << std::fixed << std::setprecision(1) << bestRating2 << "\n";
-        }
+    for(int i = 0; i < LastPrint.size() -1; i++){
+        std::cout << LastPrint[i] << "\n";
     }
+    std::cout << LastPrint[LastPrint.size() -1] ;
 }
