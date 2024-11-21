@@ -68,6 +68,9 @@ void MovieSet2::printMovie2(std::vector<std::string> prefixes) const {
         }
     }
 
+    if (!prefixes.empty()) {
+        std::cout << "\n";
+    }
     for (const auto& [prefix, bestMovie] : bestMovies) {
         if (bestMovie.getMovieName2() == "No movie found") {
             std::cout << "No movies found with prefix " << prefix << "\n";
