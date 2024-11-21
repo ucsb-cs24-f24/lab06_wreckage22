@@ -61,7 +61,7 @@ void MovieSet2::printMovie2(std::vector<std::string> prefixes) const {
             bestMovies.emplace_back(pref, matchingMovies[0]);
         }
 
-        std::cout << std::endl;
+        std::cout << "\n";
     }
 
     for (const auto& [prefix, bestMovie] : bestMovies) {
