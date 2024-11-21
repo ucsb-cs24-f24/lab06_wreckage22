@@ -77,6 +77,52 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+
+/*
+Varibles
+Let
+    n = Number of movies in the dataset.
+    m = Number of prefixes to data structure.
+    k = Maximum number of movies matching a prefix.
+    l = Maximum length of a movie name.
+
+Part 3a: Analyze time complexity
+    1. Prefix Search: O(m * n * l) for m prefixes.
+    2. Sorting Movies by Rating (.sort): O(m * k * log(k)).
+    3. Selecting the Best Movie: O(m).
+    // O(m*n*l + m*k*log(k) + m) = O(m*n*l + m*k*log(k))
+
+    Total Time Complexity: O(m*n*l + m*k*log(k))
+
+    Run Time Test:
+    input_20_random.csv         15ms
+    input_100_random.csv        46ms
+    input_1000_random.csv       258ms
+    input_76920_random.csv      24.871s
+
+Part 3B Space Complexity 
+    1. Prefix Search: O(n * l) for m prefixes.
+    2. Sorting Movies by Rating (.sort): O(m⋅l).
+    3. Selecting the Best Movie: O(m⋅k⋅l).
+    // O(n⋅l+m⋅l+m⋅k⋅l) = O(l*n)
+
+    Total Space Complexity: O(l*n)
+
+Part 3c: Trade-Offs
+    #1: Though we where aiming for a better time complexity, our space throughout 
+    our code was not as best as we wanted, do to some dficiculties that we felt the need to add more storage.
+    Despite this our overall space complexity stayed at a reasonable level.
+    Our plan and thought was that if we developed a good time complexity it could translate to better 
+    space complexity. So our space complexity was not much of a priority. We did try to come up with a 
+    data structure that would allow us sufficient freedom to not have to make too many lists from our already big list.
+    Time complexity seemed like it would be the most challenging part of this lab because if we did not use an adequate 
+    data structure, we would have to traverse the given list of movies much more than we would like to which would drastically
+    increase the time.
+
+*/
+
+
+
 /* Add your run time analysis for part 3 of the assignment here as commented block*/
 
 bool parseLine(string &line, string &movieName, double &movieRating) {
@@ -89,3 +135,5 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
 
     return true;
 }
+
+
