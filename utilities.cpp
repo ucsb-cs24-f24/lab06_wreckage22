@@ -55,7 +55,7 @@ void MovieSet2::printMovie2(std::vector<std::string> prefixes) const {
             std::sort(matchingMovies.begin(), matchingMovies.end());
 
             for (const auto& movie : matchingMovies) {
-                std::cout << movie.getMovieName2() << ", " << movie.getMovieRating2() << std::endl;
+                std::cout << movie.getMovieName2() << ", " << movie.getMovieRating2() << "\n";
             }
 
             bestMovies.emplace_back(pref, matchingMovies[0]);
@@ -66,11 +66,11 @@ void MovieSet2::printMovie2(std::vector<std::string> prefixes) const {
 
     for (const auto& [prefix, bestMovie] : bestMovies) {
         if (bestMovie.getMovieName2() == "No movie found") {
-            std::cout << "No movies found with prefix " << prefix << std::endl;
+            std::cout << "No movies found with prefix " << prefix << "\n";
         } else {
             std::cout << "Best movie with prefix " << prefix << " is: " 
                       << bestMovie.getMovieName2() << " with rating " 
-                      << bestMovie.getMovieRating2() << std::endl;
+                      << bestMovie.getMovieRating2() << "\n";
         }
     }
 }
