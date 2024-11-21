@@ -10,8 +10,9 @@ void MovieSet2::insertMovie2(const std::string& movieName2, double rating2) {
 
 void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) const {
     std::vector<std::pair<std::string, double>> bestMovies2;
-    bool firstOutput = true;  
-    for (const auto& prefix2 : prefixes2) {
+
+    for (size_t i = 0; i < prefixes2.size(); ++i) {
+        const auto& prefix2 = prefixes2[i];
         std::vector<std::pair<std::string, double>> matchingMovies2;
 
         for (const auto& [name2, rating2] : movies2) {
@@ -20,13 +21,14 @@ void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) 
             }
         }
 
-        firstOutput = false; 
+        if (i > 0) {
+            std::cout << "\n"; 
+        }
 
         if (matchingMovies2.empty()) {
             std::cout << "No movies found with prefix " << prefix2 << "\n";
             bestMovies2.emplace_back(prefix2, -1.0);
-        } 
-        else {
+        } else {
             std::sort(matchingMovies2.begin(), matchingMovies2.end(),
                       [](const auto& a, const auto& b) {
                           return a.second != b.second ? a.second > b.second : a.first < b.first;
@@ -38,7 +40,6 @@ void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) 
 
             bestMovies2.emplace_back(matchingMovies2.front().first, matchingMovies2.front().second);
         }
-
     }
 
     for (const auto& [prefix2, bestRating2] : bestMovies2) {
