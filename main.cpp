@@ -38,9 +38,15 @@ int main(int argc, char** argv) {
     double movieRating;
     // Read each file and store the name and rating    
     MovieSet ourMovieSet;
+    MovieSet2 ourMovieSet2;
 
     while (getline(movieFile, line) && parseLine(line, movieName, movieRating)) {
-        ourMovieSet.insertMovie(Movie(movieName, movieRating));
+        if(argc == 2){
+           ourMovieSet.insertMovie(Movie(movieName, movieRating)); 
+        }
+        else{
+            ourMovieSet2.insertMovie2(Movie2(movieName, movieRating));
+        }
         // Use std::string movieName and double movieRating
         // to construct your Movie objects
         // cout << movieName << " has rating " << movieRating << endl;
@@ -48,10 +54,9 @@ int main(int argc, char** argv) {
     }
 
     movieFile.close();
-    ourMovieSet.printMovie();
-    
+        
     if (argc == 2) {
-        //print all the movies in ascending alphabetical order of movie names
+        ourMovieSet.printMovie();//print all the movies in ascending alphabetical order of movie names
         return 0;
     }
 
@@ -69,14 +74,19 @@ int main(int argc, char** argv) {
         }
     }
 
-    //  For each prefix,
-    //  Find all movies that have that prefix and store them in an appropriate data structure
-    //  If no movie with that prefix exists print the following message
-    cout << "No movies found with prefix " << "<replace with prefix>" << endl;
+    if(argc == 3){
+        ourMovieSet2.printMovie2(prefixes);
+    }
 
-    //  For each prefix,
-    //  Print the highest rated movie with that prefix if it exists.
-    cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
+
+    // //  For each prefix,
+    // //  Find all movies that have that prefix and store them in an appropriate data structure
+    // //  If no movie with that prefix exists print the following message
+    // cout << "No movies found with prefix " << "<replace with prefix>" << endl;
+
+    // //  For each prefix,
+    // //  Print the highest rated movie with that prefix if it exists.
+    // cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
 
     return 0;
 }

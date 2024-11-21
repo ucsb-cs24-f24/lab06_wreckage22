@@ -28,10 +28,8 @@ class MovieSet{
     public:
 
     void insertMovie(Movie m);
-    // int size();
-    // void removeMovie(Movie eraseMe);
     void printMovie() const;
 };
 
 
-#endif 
+#endif

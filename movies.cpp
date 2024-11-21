@@ -14,7 +14,7 @@ void MovieSet::insertMovie(Movie m){
 }
 
 void MovieSet::printMovie() const{
-        for(const auto& movie : movies){
+    for(const auto& movie : movies){
         std::cout << movie.getMovieName() << ", " << movie.getMovieRating() << std::endl;
     }
 }
