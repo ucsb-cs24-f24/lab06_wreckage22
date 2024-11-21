@@ -30,9 +30,9 @@ void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) 
             }
         }
 
-        if (i > 0) {
-            std::cout << "\n";  
-        }
+        // if (i > 0) {
+        //     std::cout << "\n";  
+        // }
 
         if (matchingMovies2.empty()) {
             std::cout << "No movies found with prefix " << prefix2 << "\n";
