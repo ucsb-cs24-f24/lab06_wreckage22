@@ -55,12 +55,18 @@ void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) 
         }
     }
 
-    for(int i = 0; i < LastPrint.size() -1; i++){
-        std::cout << LastPrint[i] << "\n";
-    }
-    std::cout << LastPrint[LastPrint.size() -1] ;
+    // for(int i = 0; i < LastPrint.size() -1; i++){
+    //     std::cout << LastPrint[i] << "\n";
+    // }
+    // std::cout << LastPrint[LastPrint.size() -1] ;
 
-    for (const auto& line : LastPrint) {
-        std::cout << line << "\n";
+    // for (const auto& line : LastPrint) {
+    //     std::cout << line << "\n";
+    // }
+    for (size_t i = 0; i < LastPrint.size(); ++i) {
+        std::cout << LastPrint[i];
+        if (i != LastPrint.size() - 1) {
+            std::cout << "\n";
+        }
     }
 }
