@@ -2,41 +2,18 @@
 #define UTILITIES_H
 
 #include <string>
-#include <set>
-#include <iostream>
+#include <unordered_map>
 #include <vector>
 
-class Movie2{
-    private:
-    std::string movieName2;
-    double rating2;    
-    public:
-    Movie2(std::string str, double rating);
+class MovieSet2 {
+private:
+    std::unordered_map<std::string, double> movies2; \
 
-    std::string getMovieName2() const{
-        return movieName2;
-    }
-    double getMovieRating2() const{
-        return rating2;
-    }
-    std::string getSubstr(int zero, int prefSize) const{
-        return movieName2.substr(0, prefSize);
-    }
-
-    bool operator<(const Movie2& other) const;
+public:
+    void insertMovie2(const std::string& movieName2, double rating2);
+    void printMoviesByPrefix2(const std::vector<std::string>& prefixes2) const;
 };
 
-class MovieSet2
-{
-    private:
-    std::set<Movie2> movies2;
-
-    public:
-
-    void insertMovie2(Movie2 m);
-    void printMovie2(std::vector<std::string> prefixes) const;
-};
+#endif
 
 
-
-#endif 

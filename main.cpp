@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
            ourMovieSet.insertMovie(Movie(movieName, movieRating)); 
         }
         else{
-            ourMovieSet2.insertMovie2(Movie2(movieName, movieRating));
+            ourMovieSet2.insertMovie2(movieName, movieRating);
         }
         // Use std::string movieName and double movieRating
         // to construct your Movie objects
@@ -75,18 +75,8 @@ int main(int argc, char** argv) {
     }
 
     if(argc == 3){
-        ourMovieSet2.printMovie2(prefixes);
+        ourMovieSet2.printMoviesByPrefix2(prefixes);
     }
-
-
-    // //  For each prefix,
-    // //  Find all movies that have that prefix and store them in an appropriate data structure
-    // //  If no movie with that prefix exists print the following message
-    // cout << "No movies found with prefix " << "<replace with prefix>" << endl;
-
-    // //  For each prefix,
-    // //  Print the highest rated movie with that prefix if it exists.
-    // cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
 
     return 0;
 }

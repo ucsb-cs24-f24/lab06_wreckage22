@@ -1,83 +1,52 @@
 #include "utilities.h"
+#include <iostream>
 #include <algorithm>
+#include <vector>
+#include <iomanip>
 
-Movie2::Movie2(std::string movieName2, double rating2){
-    this->movieName2 = movieName2;
-    this->rating2 = rating2;
+void MovieSet2::insertMovie2(const std::string& movieName2, double rating2) {
+    movies2[movieName2] = rating2; 
 }
 
-bool Movie2::operator<(const Movie2& other) const{
-    if(rating2 != other.rating2){
-        return rating2 > other.rating2;
-    }
-    else{
-        return movieName2 < other.movieName2;
-    }
+void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) const {
+    std::vector<std::pair<std::string, double>> bestMovies2;
 
-}
+    for (const auto& prefix2 : prefixes2) {
+        std::vector<std::pair<std::string, double>> matchingMovies2;
 
-void MovieSet2::insertMovie2(Movie2 m){
-    movies2.insert(m);
-}
-
-// void MovieSet2::printMovie2(std::vector<std::string> prefixes) const{
-//     std::vector<Movie2> matchingMovies;
-//     for(int i = 0; i < prefixes.size(); i++){
-//         std::string pref = prefixes[i];
-//         int prefSize = prefixes[i].size();
-//         for(const auto& movie2 : movies2){
-//             std::string moviePref = movie2.getSubstr(0,prefSize);
-//             if(moviePref == pref){
-//                 std::cout << movie2.getMovieName2() << ", " << movie2.getMovieRating2() << std::endl;
-//             }
-//         }
-//         std::cout << std::endl;
-//     }
-// }
-
-void MovieSet2::printMovie2(std::vector<std::string> prefixes) const {
-    std::vector<std::pair<std::string, Movie2>> bestMovies;
-
-    for (size_t i = 0; i < prefixes.size(); ++i) {
-        const auto& prefix = prefixes[i];
-        std::vector<Movie2> matchingMovies;
-        int prefSize = prefix.size();
-
-        for (const auto& movie : movies2) {
-            if (movie.getMovieName2().substr(0, prefSize) == prefix) {
-                matchingMovies.push_back(movie);
+        for (const auto& [name2, rating2] : movies2) {
+            if (name2.substr(0, prefix2.size()) == prefix2) {
+                matchingMovies2.emplace_back(name2, rating2);
             }
         }
 
-        if (matchingMovies.empty()) {
-            bestMovies.emplace_back(prefix, Movie2("No movie found", 0.0));
+        if (matchingMovies2.empty()) {
+            std::cout << "No movies found with prefix " << prefix2 << "\n";
+            bestMovies2.emplace_back(prefix2, -1.0);
         } 
         else {
-            std::sort(matchingMovies.begin(), matchingMovies.end());
-            for (const auto& movie : matchingMovies) {
-                std::cout << movie.getMovieName2() << ", " << movie.getMovieRating2() << "\n";
+            std::sort(matchingMovies2.begin(), matchingMovies2.end(),
+                      [](const auto& a, const auto& b) {
+                          return a.second != b.second ? a.second > b.second : a.first < b.first;
+                      });
+
+            for (const auto& [name2, rating2] : matchingMovies2) {
+                std::cout << name2 << ", " << std::fixed << std::setprecision(1) << rating2 << "\n";
             }
+
+            bestMovies2.emplace_back(matchingMovies2.front().first, matchingMovies2.front().second);
         }
 
-        if (i != prefixes.size() - 1) {
-            std::cout << "\n";
-        }
-
-        if (!matchingMovies.empty()) {
-            bestMovies.emplace_back(prefix, matchingMovies.front());
-        }
+        std::cout << "god\n";
     }
 
-    if (!prefixes.empty()) {
-        std::cout << "\n";
-    }
-    for (const auto& [prefix, bestMovie] : bestMovies) {
-        if (bestMovie.getMovieName2() == "No movie found") {
-            std::cout << "No movies found with prefix " << prefix << "\n";
+    for (const auto& [prefix2, bestRating2] : bestMovies2) {
+        if (bestRating2 == -1.0) {
+            std::cout << "No movies found with prefix " << prefix2 << "\n";
         } else {
-            std::cout << "Best movie with prefix " << prefix << " is: "
-                      << bestMovie.getMovieName2() << " with rating "
-                      << bestMovie.getMovieRating2() << "\n";
+            std::cout << "Best movie with prefix " << prefix2 << " is: "
+                      << prefix2 << " with rating "
+                      << std::fixed << std::setprecision(1) << bestRating2 << "\n";
         }
     }
 }
