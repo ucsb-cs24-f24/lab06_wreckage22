@@ -19,9 +19,6 @@ void MovieSet2::printMoviesByPrefix2(const std::vector<std::string>& prefixes2) 
                 matchingMovies2.emplace_back(name2, rating2);
             }
         }
-        if (!firstOutput) {
-            std::cout << "\n"; 
-        }
 
         firstOutput = false; 
 
